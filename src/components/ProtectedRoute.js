@@ -2,14 +2,9 @@ import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = ({ isAuthenticated, isAdmin }) => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !isAdmin) {
         // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
-        return <Navigate to="/auth" />;
-    }
-
-    if (!isAdmin) {
-        // Nếu không phải admin, chuyển hướng đến trang không có quyền
-        return <Navigate to="/unauthorized" />;
+        return <Navigate to="/auth"  replace/>;
     }
     console.log("isAuthenticated:", isAuthenticated, "isAdmin:", isAdmin);
 

@@ -18,7 +18,10 @@ const Admin = () => {
   useEffect(() => {
     const fetchDishes = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/dishes');
+        const token = localStorage.getItem('token'); // Lấy token từ localStorage
+        const res = await axios.get('http://localhost:5000/api/dishes', {
+            headers: { Authorization: `Bearer ${token}` }, // Gửi token trong header
+        });
         setDishes(res.data);
       } catch (error) {
         console.error('Error fetching dishes:', error);
@@ -41,31 +44,44 @@ const Admin = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/dishes/${id}`);
-      setDishes(dishes.filter(d => d._id !== id));
+        const token = localStorage.getItem('token'); // Lấy token từ localStorage
+        await axios.delete(`http://localhost:5000/api/dishes/${id}`, {
+            headers: { Authorization: `Bearer ${token}` }, // Gửi token trong header
+        });
+        setDishes(dishes.filter(d => d._id !== id));
     } catch (err) {
-      console.error('Failed to delete dish:', err);
+        console.error('Failed to delete dish:', err);
     }
   };
 
   const handleUpdateDish = async (updatedDish) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/dishes/${updatedDish._id}`, updatedDish);
-      setDishes(dishes.map(d => (d._id === updatedDish._id ? res.data : d)));
-      setSelectedDish(null); // Đóng modal sau khi cập nhật thành công
+        const token = localStorage.getItem('token'); // Lấy token từ localStorage
+        const res = await axios.put(
+            `http://localhost:5000/api/dishes/${updatedDish._id}`,
+            updatedDish,
+            {
+                headers: { Authorization: `Bearer ${token}` }, // Gửi token trong header
+            }
+        );
+        setDishes(dishes.map(d => (d._id === updatedDish._id ? res.data : d)));
+        setSelectedDish(null); // Đóng modal sau khi cập nhật thành công
     } catch (err) {
-      console.error('Failed to update dish:', err);
+        console.error('Failed to update dish:', err);
     }
   };
 
   const handleAddDish = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/dishes', newDish);
-      setDishes([...dishes, res.data]);
-      setNewDish({ name: '', price: '', description: '', category: '', image: '' }); // Reset form
+        const token = localStorage.getItem('token'); // Lấy token từ localStorage
+        const res = await axios.post('http://localhost:5000/api/dishes', newDish, {
+            headers: { Authorization: `Bearer ${token}` }, // Gửi token trong header
+        });
+        setDishes([...dishes, res.data]);
+        setNewDish({ name: '', price: '', description: '', category: '', image: '' }); // Reset form
     } catch (err) {
-      console.error('Failed to add dish:', err);
+        console.error('Failed to add dish:', err);
     }
   };
 
