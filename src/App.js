@@ -13,6 +13,7 @@ import Admin from './pages/Admin';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 import 'animate.css';
+import NotAdmin from './pages/NotAdmin';
 
 const Search = () => <div className="search"><h1>Tìm Kiếm</h1><p>Chức năng tìm kiếm đang phát triển...</p></div>;
 const Terms = () => <div className="terms"><h1>Điều Khoản Dịch Vụ</h1><p>Điều khoản sẽ được cập nhật sau...</p></div>;
@@ -48,6 +49,7 @@ console.log(isAuthenticated, isAdmin);
                     <Route path="/auth" element={<Auth />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/unauthorized" element={<NotAdmin />} />
                     {/* Bảo vệ route admin */}
                     <Route
                         path="/"
