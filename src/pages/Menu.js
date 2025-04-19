@@ -108,7 +108,7 @@ const Menu = () => {
                             className={`dish-item ${selectedDish?._id === dish._id ? 'selected' : ''}`}
                         >
                             <div className="dish-card" onClick={() => handleSelectDish(dish)}>
-                                <img src={`/images/dishes/${dish.image}`} alt={dish.name} />
+                            <img src={`/images/dishes/${dish.image}`} alt={dish.name} loading="lazy" />
                                 <h3>{dish.name}</h3>
                                 <p className="price">{dish.price.toLocaleString('vi-VN')} ₫</p>
                             </div>

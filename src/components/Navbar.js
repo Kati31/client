@@ -22,7 +22,6 @@ const Navbar = () => {
             <ul>
                 <li><Link to="/">Trang Chủ</Link></li>
                 <li><Link to="/menu">Menu</Link></li>
-                <li><Link to="/news">Tin Tức</Link></li>
                 <li><Link to="/contact">Liên Hệ</Link></li>
                 <li>
                     <Link to="/cart" className="cart-icon">
